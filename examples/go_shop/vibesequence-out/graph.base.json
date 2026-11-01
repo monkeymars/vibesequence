@@ -1,0 +1,1724 @@
+{
+ "functions": {
+  "cmd.server:main": {
+   "id": "cmd.server:main",
+   "name": "main",
+   "module": "cmd.server",
+   "cls": null,
+   "file": "cmd/server/main.go",
+   "line": 13,
+   "end_line": 30,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "db.Open",
+     "line": 14,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Open",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "service.NewOrderService",
+     "line": 15,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.service:NewOrderService",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "handlers.NewOrderHandler",
+     "line": 16,
+     "order": 2,
+     "context": [],
+     "resolved": "internal.handlers:NewOrderHandler",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.NewServeMux",
+     "line": 18,
+     "order": 3,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "http.ListenAndServe",
+     "line": 29,
+     "order": 4,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Open()",
+    "svc": "service.OrderService",
+    "h": "handlers.OrderHandler",
+    "mux": "http.ServeMux"
+   }
+  },
+  "cmd.server:POST /orders": {
+   "id": "cmd.server:POST /orders",
+   "name": "POST /orders",
+   "module": "cmd.server",
+   "cls": null,
+   "file": "cmd/server/main.go",
+   "line": 19,
+   "end_line": 19,
+   "decorators": [
+    "mux.post('/orders')"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "h.Create",
+     "line": 19,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.handlers:OrderHandler.Create",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Open()",
+    "svc": "service.OrderService",
+    "h": "handlers.OrderHandler",
+    "mux": "http.ServeMux"
+   }
+  },
+  "cmd.server:GET /orders/{id}": {
+   "id": "cmd.server:GET /orders/{id}",
+   "name": "GET /orders/{id}",
+   "module": "cmd.server",
+   "cls": null,
+   "file": "cmd/server/main.go",
+   "line": 20,
+   "end_line": 20,
+   "decorators": [
+    "mux.get('/orders/{id}')"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "h.Get",
+     "line": 20,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.handlers:OrderHandler.Get",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Open()",
+    "svc": "service.OrderService",
+    "h": "handlers.OrderHandler",
+    "mux": "http.ServeMux"
+   }
+  },
+  "cmd.server:POST /orders/{id}/cancel": {
+   "id": "cmd.server:POST /orders/{id}/cancel",
+   "name": "POST /orders/{id}/cancel",
+   "module": "cmd.server",
+   "cls": null,
+   "file": "cmd/server/main.go",
+   "line": 21,
+   "end_line": 21,
+   "decorators": [
+    "mux.post('/orders/{id}/cancel')"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "h.Cancel",
+     "line": 21,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.handlers:OrderHandler.Cancel",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Open()",
+    "svc": "service.OrderService",
+    "h": "handlers.OrderHandler",
+    "mux": "http.ServeMux"
+   }
+  },
+  "cmd.server:GET /healthz": {
+   "id": "cmd.server:GET /healthz",
+   "name": "GET /healthz",
+   "module": "cmd.server",
+   "cls": null,
+   "file": "cmd/server/main.go",
+   "line": 22,
+   "end_line": 28,
+   "decorators": [
+    "mux.get('/healthz')"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "r.Context",
+     "line": 23,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "conn.Ping",
+     "line": 23,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.db:Conn.Ping",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.Error",
+     "line": 24,
+     "order": 2,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "w.WriteHeader",
+     "line": 27,
+     "order": 3,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Open()",
+    "svc": "service.OrderService",
+    "h": "handlers.OrderHandler",
+    "mux": "http.ServeMux",
+    "w": "http.ResponseWriter",
+    "r": "http.Request",
+    "err": "conn.Ping()"
+   }
+  },
+  "cmd.shopctl:main": {
+   "id": "cmd.shopctl:main",
+   "name": "main",
+   "module": "cmd.shopctl",
+   "cls": null,
+   "file": "cmd/shopctl/main.go",
+   "line": 13,
+   "end_line": 28,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "root.AddCommand",
+     "line": 15,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "root.AddCommand",
+     "line": 24,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "root.Execute",
+     "line": 25,
+     "order": 2,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "os.Exit",
+     "line": 26,
+     "order": 3,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "root": "cobra.Command",
+    "err": "root.Execute()"
+   }
+  },
+  "cmd.shopctl:restock": {
+   "id": "cmd.shopctl:restock",
+   "name": "restock",
+   "module": "cmd.shopctl",
+   "cls": null,
+   "file": "cmd/shopctl/main.go",
+   "line": 18,
+   "end_line": 22,
+   "decorators": [
+    "cobra.command"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "os.Getenv",
+     "line": 19,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "db.Open",
+     "line": 19,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.db:Open",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "repos.NewProductRepo",
+     "line": 20,
+     "order": 2,
+     "context": [],
+     "resolved": "internal.repos:NewProductRepo",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "cmd.Context",
+     "line": 21,
+     "order": 3,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "products.Restock",
+     "line": 21,
+     "order": 4,
+     "context": [],
+     "resolved": "internal.repos:ProductRepo.Restock",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "root": "cobra.Command",
+    "cmd": "cobra.Command",
+    "conn": "db.Open()",
+    "products": "repos.ProductRepo"
+   }
+  },
+  "cmd.shopctl:migrate": {
+   "id": "cmd.shopctl:migrate",
+   "name": "migrate",
+   "module": "cmd.shopctl",
+   "cls": null,
+   "file": "cmd/shopctl/main.go",
+   "line": 24,
+   "end_line": 24,
+   "decorators": [
+    "cobra.command"
+   ],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "runMigrate",
+     "line": 24,
+     "order": 0,
+     "context": [],
+     "resolved": "cmd.shopctl:runMigrate",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "root": "cobra.Command"
+   }
+  },
+  "cmd.shopctl:runMigrate": {
+   "id": "cmd.shopctl:runMigrate",
+   "name": "runMigrate",
+   "module": "cmd.shopctl",
+   "cls": null,
+   "file": "cmd/shopctl/main.go",
+   "line": 30,
+   "end_line": 33,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "os.Getenv",
+     "line": 31,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "db.Open",
+     "line": 31,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.db:Open",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "cmd.Context",
+     "line": 32,
+     "order": 2,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "conn.Exec",
+     "line": 32,
+     "order": 3,
+     "context": [],
+     "resolved": "internal.db:Conn.Exec",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "cmd": "cobra.Command",
+    "conn": "db.Open()"
+   }
+  },
+  "internal.auth:RequireUser": {
+   "id": "internal.auth:RequireUser",
+   "name": "RequireUser",
+   "module": "internal.auth",
+   "cls": null,
+   "file": "internal/auth/auth.go",
+   "line": 16,
+   "end_line": 23,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "r.Header.Get",
+     "line": 17,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "verify",
+     "line": 18,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.auth:verify",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "r": "http.Request",
+    "token": "strings.TrimPrefix()",
+    "uid": "verify()"
+   }
+  },
+  "internal.auth:verify": {
+   "id": "internal.auth:verify",
+   "name": "verify",
+   "module": "internal.auth",
+   "cls": null,
+   "file": "internal/auth/auth.go",
+   "line": 25,
+   "end_line": 30,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "token": "string"
+   }
+  },
+  "internal.db:Open": {
+   "id": "internal.db:Open",
+   "name": "Open",
+   "module": "internal.db",
+   "cls": null,
+   "file": "internal/db/db.go",
+   "line": 14,
+   "end_line": 20,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "sql.Open",
+     "line": 15,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "dsn": "string",
+    "d": "sql.Open()"
+   }
+  },
+  "internal.db:Conn.QueryRow": {
+   "id": "internal.db:Conn.QueryRow",
+   "name": "QueryRow",
+   "module": "internal.db",
+   "cls": "Conn",
+   "file": "internal/db/db.go",
+   "line": 22,
+   "end_line": 24,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.sql.QueryRowContext",
+     "line": 23,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "query": "string",
+    "args": "any"
+   }
+  },
+  "internal.db:Conn.Exec": {
+   "id": "internal.db:Conn.Exec",
+   "name": "Exec",
+   "module": "internal.db",
+   "cls": "Conn",
+   "file": "internal/db/db.go",
+   "line": 26,
+   "end_line": 29,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.sql.ExecContext",
+     "line": 27,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "query": "string",
+    "args": "any",
+    "_": "c.sql.ExecContext()"
+   }
+  },
+  "internal.db:Conn.Ping": {
+   "id": "internal.db:Conn.Ping",
+   "name": "Ping",
+   "module": "internal.db",
+   "cls": "Conn",
+   "file": "internal/db/db.go",
+   "line": 31,
+   "end_line": 33,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.sql.PingContext",
+     "line": 32,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context"
+   }
+  },
+  "internal.events:Subscribe": {
+   "id": "internal.events:Subscribe",
+   "name": "Subscribe",
+   "module": "internal.events",
+   "cls": null,
+   "file": "internal/events/events.go",
+   "line": 7,
+   "end_line": 9,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "topic": "string",
+    "subscribers": "append()"
+   }
+  },
+  "internal.events:Publish": {
+   "id": "internal.events:Publish",
+   "name": "Publish",
+   "module": "internal.events",
+   "cls": null,
+   "file": "internal/events/events.go",
+   "line": 11,
+   "end_line": 16,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "fn",
+     "line": 14,
+     "order": 0,
+     "context": [
+      "loop:for _, fn := range subscribers[topic]"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "topic": "string",
+    "id": "int64"
+   }
+  },
+  "internal.handlers:NewOrderHandler": {
+   "id": "internal.handlers:NewOrderHandler",
+   "name": "NewOrderHandler",
+   "module": "internal.handlers",
+   "cls": null,
+   "file": "internal/handlers/orders.go",
+   "line": 16,
+   "end_line": 18,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "svc": "service.OrderService"
+   }
+  },
+  "internal.handlers:OrderHandler.Create": {
+   "id": "internal.handlers:OrderHandler.Create",
+   "name": "Create",
+   "module": "internal.handlers",
+   "cls": "OrderHandler",
+   "file": "internal/handlers/orders.go",
+   "line": 24,
+   "end_line": 41,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "auth.RequireUser",
+     "line": 25,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.auth:RequireUser",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.Error",
+     "line": 27,
+     "order": 1,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "err.Error",
+     "line": 32,
+     "order": 2,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "http.Error",
+     "line": 32,
+     "order": 3,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "r.Context",
+     "line": 35,
+     "order": 4,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "self.svc.Place",
+     "line": 35,
+     "order": 5,
+     "context": [],
+     "resolved": "internal.service:OrderService.Place",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "err.Error",
+     "line": 37,
+     "order": 6,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "http.Error",
+     "line": 37,
+     "order": 7,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "writeJSON",
+     "line": 40,
+     "order": 8,
+     "context": [],
+     "resolved": "internal.handlers:writeJSON",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "w": "http.ResponseWriter",
+    "r": "http.Request",
+    "user": "auth.RequireUser()",
+    "req": "createOrderRequest",
+    "order": "h.svc.Place()"
+   }
+  },
+  "internal.handlers:OrderHandler.Get": {
+   "id": "internal.handlers:OrderHandler.Get",
+   "name": "Get",
+   "module": "internal.handlers",
+   "cls": "OrderHandler",
+   "file": "internal/handlers/orders.go",
+   "line": 43,
+   "end_line": 56,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "auth.RequireUser",
+     "line": 44,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.auth:RequireUser",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.Error",
+     "line": 46,
+     "order": 1,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "r.PathValue",
+     "line": 49,
+     "order": 2,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "r.Context",
+     "line": 50,
+     "order": 3,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "self.svc.Get",
+     "line": 50,
+     "order": 4,
+     "context": [],
+     "resolved": "internal.service:OrderService.Get",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.Error",
+     "line": 52,
+     "order": 5,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "writeJSON",
+     "line": 55,
+     "order": 6,
+     "context": [],
+     "resolved": "internal.handlers:writeJSON",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "w": "http.ResponseWriter",
+    "r": "http.Request",
+    "user": "auth.RequireUser()",
+    "id": "strconv.ParseInt()",
+    "order": "h.svc.Get()"
+   }
+  },
+  "internal.handlers:OrderHandler.Cancel": {
+   "id": "internal.handlers:OrderHandler.Cancel",
+   "name": "Cancel",
+   "module": "internal.handlers",
+   "cls": "OrderHandler",
+   "file": "internal/handlers/orders.go",
+   "line": 58,
+   "end_line": 70,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "auth.RequireUser",
+     "line": 59,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.auth:RequireUser",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "http.Error",
+     "line": 61,
+     "order": 1,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "r.PathValue",
+     "line": 64,
+     "order": 2,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "r.Context",
+     "line": 65,
+     "order": 3,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "self.svc.Cancel",
+     "line": 65,
+     "order": 4,
+     "context": [],
+     "resolved": "internal.service:OrderService.Cancel",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "err.Error",
+     "line": 66,
+     "order": 5,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "http.Error",
+     "line": 66,
+     "order": 6,
+     "context": [
+      "except"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "w.WriteHeader",
+     "line": 69,
+     "order": 7,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "w": "http.ResponseWriter",
+    "r": "http.Request",
+    "user": "auth.RequireUser()",
+    "id": "strconv.ParseInt()",
+    "err": "h.svc.Cancel()"
+   }
+  },
+  "internal.handlers:writeJSON": {
+   "id": "internal.handlers:writeJSON",
+   "name": "writeJSON",
+   "module": "internal.handlers",
+   "cls": null,
+   "file": "internal/handlers/orders.go",
+   "line": 72,
+   "end_line": 76,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "w.Header",
+     "line": 73,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "w.Header().Set",
+     "line": 73,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "w.WriteHeader",
+     "line": 74,
+     "order": 2,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "w": "http.ResponseWriter",
+    "status": "int",
+    "v": "any"
+   }
+  },
+  "internal.payment:NewGateway": {
+   "id": "internal.payment:NewGateway",
+   "name": "NewGateway",
+   "module": "internal.payment",
+   "cls": null,
+   "file": "internal/payment/gateway.go",
+   "line": 19,
+   "end_line": 21,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "baseURL": "string"
+   }
+  },
+  "internal.payment:Gateway.Charge": {
+   "id": "internal.payment:Gateway.Charge",
+   "name": "Charge",
+   "module": "internal.payment",
+   "cls": "Gateway",
+   "file": "internal/payment/gateway.go",
+   "line": 23,
+   "end_line": 34,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.client.Post",
+     "line": 25,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "resp.Body.Close",
+     "line": 29,
+     "order": 1,
+     "context": [
+      "finally"
+     ],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "userID": "int64",
+    "amount": "float64",
+    "body": "json.Marshal()",
+    "resp": "g.client.Post()"
+   }
+  },
+  "internal.payment:Gateway.Refund": {
+   "id": "internal.payment:Gateway.Refund",
+   "name": "Refund",
+   "module": "internal.payment",
+   "cls": "Gateway",
+   "file": "internal/payment/gateway.go",
+   "line": 36,
+   "end_line": 43,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.client.Post",
+     "line": 38,
+     "order": 0,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "lib"
+    },
+    {
+     "expr": "resp.Body.Close",
+     "line": 42,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "ref": "string",
+    "body": "json.Marshal()",
+    "resp": "g.client.Post()"
+   }
+  },
+  "internal.repos:BaseRepo.Find": {
+   "id": "internal.repos:BaseRepo.Find",
+   "name": "Find",
+   "module": "internal.repos",
+   "cls": "BaseRepo",
+   "file": "internal/repos/base.go",
+   "line": 16,
+   "end_line": 18,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.conn.QueryRow",
+     "line": 17,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Conn.QueryRow",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "id": "any"
+   }
+  },
+  "internal.repos:NewOrderRepo": {
+   "id": "internal.repos:NewOrderRepo",
+   "name": "NewOrderRepo",
+   "module": "internal.repos",
+   "cls": null,
+   "file": "internal/repos/order_repo.go",
+   "line": 26,
+   "end_line": 28,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "conn": "db.Conn"
+   }
+  },
+  "internal.repos:OrderRepo.Get": {
+   "id": "internal.repos:OrderRepo.Get",
+   "name": "Get",
+   "module": "internal.repos",
+   "cls": "OrderRepo",
+   "file": "internal/repos/order_repo.go",
+   "line": 30,
+   "end_line": 34,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.Find",
+     "line": 32,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.repos:BaseRepo.Find",
+     "receiver": "internal.repos:OrderRepo",
+     "ext_kind": null
+    },
+    {
+     "expr": "self.Find().Scan",
+     "line": 32,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "id": "int64",
+    "o": "Order"
+   }
+  },
+  "internal.repos:OrderRepo.Create": {
+   "id": "internal.repos:OrderRepo.Create",
+   "name": "Create",
+   "module": "internal.repos",
+   "cls": "OrderRepo",
+   "file": "internal/repos/order_repo.go",
+   "line": 36,
+   "end_line": 47,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.conn.QueryRow",
+     "line": 38,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Conn.QueryRow",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.conn.QueryRow().Scan",
+     "line": 38,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    },
+    {
+     "expr": "self.conn.Exec",
+     "line": 42,
+     "order": 2,
+     "context": [
+      "loop:for _, l := range lines"
+     ],
+     "resolved": "internal.db:Conn.Exec",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "userID": "int64",
+    "total": "float64",
+    "o": "Order",
+    "err": "r.conn.Exec()"
+   }
+  },
+  "internal.repos:OrderRepo.UpdateStatus": {
+   "id": "internal.repos:OrderRepo.UpdateStatus",
+   "name": "UpdateStatus",
+   "module": "internal.repos",
+   "cls": "OrderRepo",
+   "file": "internal/repos/order_repo.go",
+   "line": 49,
+   "end_line": 51,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.conn.Exec",
+     "line": 50,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Conn.Exec",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "id": "int64",
+    "status": "string"
+   }
+  },
+  "internal.repos:OrderRepo.MarkFailed": {
+   "id": "internal.repos:OrderRepo.MarkFailed",
+   "name": "MarkFailed",
+   "module": "internal.repos",
+   "cls": "OrderRepo",
+   "file": "internal/repos/order_repo.go",
+   "line": 53,
+   "end_line": 55,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.UpdateStatus",
+     "line": 54,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.repos:OrderRepo.UpdateStatus",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "id": "int64"
+   }
+  },
+  "internal.repos:NewProductRepo": {
+   "id": "internal.repos:NewProductRepo",
+   "name": "NewProductRepo",
+   "module": "internal.repos",
+   "cls": null,
+   "file": "internal/repos/product_repo.go",
+   "line": 19,
+   "end_line": 21,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "conn": "db.Conn"
+   }
+  },
+  "internal.repos:ProductRepo.Get": {
+   "id": "internal.repos:ProductRepo.Get",
+   "name": "Get",
+   "module": "internal.repos",
+   "cls": "ProductRepo",
+   "file": "internal/repos/product_repo.go",
+   "line": 23,
+   "end_line": 27,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.Find",
+     "line": 25,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.repos:BaseRepo.Find",
+     "receiver": "internal.repos:ProductRepo",
+     "ext_kind": null
+    },
+    {
+     "expr": "self.Find().Scan",
+     "line": 25,
+     "order": 1,
+     "context": [],
+     "resolved": null,
+     "receiver": null,
+     "ext_kind": "local"
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "sku": "string",
+    "p": "Product"
+   }
+  },
+  "internal.repos:ProductRepo.DecrementStock": {
+   "id": "internal.repos:ProductRepo.DecrementStock",
+   "name": "DecrementStock",
+   "module": "internal.repos",
+   "cls": "ProductRepo",
+   "file": "internal/repos/product_repo.go",
+   "line": 29,
+   "end_line": 31,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.conn.Exec",
+     "line": 30,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Conn.Exec",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "sku": "string",
+    "qty": "int"
+   }
+  },
+  "internal.repos:ProductRepo.Restock": {
+   "id": "internal.repos:ProductRepo.Restock",
+   "name": "Restock",
+   "module": "internal.repos",
+   "cls": "ProductRepo",
+   "file": "internal/repos/product_repo.go",
+   "line": 33,
+   "end_line": 35,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.conn.Exec",
+     "line": 34,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.db:Conn.Exec",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "sku": "string",
+    "qty": "int"
+   }
+  },
+  "internal.service:OrderService.Get": {
+   "id": "internal.service:OrderService.Get",
+   "name": "Get",
+   "module": "internal.service",
+   "cls": "OrderService",
+   "file": "internal/service/order_cancel.go",
+   "line": 14,
+   "end_line": 23,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.orders.Get",
+     "line": 15,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.repos:OrderRepo.Get",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "user": "auth.User",
+    "id": "int64",
+    "order": "s.orders.Get()"
+   }
+  },
+  "internal.service:OrderService.Cancel": {
+   "id": "internal.service:OrderService.Cancel",
+   "name": "Cancel",
+   "module": "internal.service",
+   "cls": "OrderService",
+   "file": "internal/service/order_cancel.go",
+   "line": 25,
+   "end_line": 38,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "self.Get",
+     "line": 26,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.service:OrderService.Get",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.payments.Refund",
+     "line": 30,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.payment:Gateway.Refund",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.orders.UpdateStatus",
+     "line": 33,
+     "order": 2,
+     "context": [],
+     "resolved": "internal.repos:OrderRepo.UpdateStatus",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "events.Publish",
+     "line": 36,
+     "order": 3,
+     "context": [],
+     "resolved": "internal.events:Publish",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "user": "auth.User",
+    "id": "int64",
+    "order": "s.Get()",
+    "err": "s.orders.UpdateStatus()"
+   }
+  },
+  "internal.service:NewOrderService": {
+   "id": "internal.service:NewOrderService",
+   "name": "NewOrderService",
+   "module": "internal.service",
+   "cls": null,
+   "file": "internal/service/order_service.go",
+   "line": 28,
+   "end_line": 34,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "repos.NewOrderRepo",
+     "line": 30,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.repos:NewOrderRepo",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "repos.NewProductRepo",
+     "line": 31,
+     "order": 1,
+     "context": [],
+     "resolved": "internal.repos:NewProductRepo",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "payment.NewGateway",
+     "line": 32,
+     "order": 2,
+     "context": [],
+     "resolved": "internal.payment:NewGateway",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "conn": "db.Conn"
+   }
+  },
+  "internal.service:OrderService.Place": {
+   "id": "internal.service:OrderService.Place",
+   "name": "Place",
+   "module": "internal.service",
+   "cls": "OrderService",
+   "file": "internal/service/order_service.go",
+   "line": 36,
+   "end_line": 64,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "validate",
+     "line": 37,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.service:validate",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.products.Get",
+     "line": 42,
+     "order": 1,
+     "context": [
+      "loop:for _, it := range items"
+     ],
+     "resolved": "internal.repos:ProductRepo.Get",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.pricing.Line",
+     "line": 49,
+     "order": 2,
+     "context": [
+      "loop:for _, it := range items"
+     ],
+     "resolved": "internal.service:Pricing.Line",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "total",
+     "line": 51,
+     "order": 3,
+     "context": [],
+     "resolved": "internal.service:total",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.orders.Create",
+     "line": 51,
+     "order": 4,
+     "context": [],
+     "resolved": "internal.repos:OrderRepo.Create",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.payments.Charge",
+     "line": 55,
+     "order": 5,
+     "context": [],
+     "resolved": "internal.payment:Gateway.Charge",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.orders.MarkFailed",
+     "line": 56,
+     "order": 6,
+     "context": [
+      "except"
+     ],
+     "resolved": "internal.repos:OrderRepo.MarkFailed",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "self.products.DecrementStock",
+     "line": 60,
+     "order": 7,
+     "context": [
+      "loop:for _, it := range items"
+     ],
+     "resolved": "internal.repos:ProductRepo.DecrementStock",
+     "receiver": null,
+     "ext_kind": null
+    },
+    {
+     "expr": "events.Publish",
+     "line": 62,
+     "order": 8,
+     "context": [
+      "go"
+     ],
+     "resolved": "internal.events:Publish",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {
+    "ctx": "context.Context",
+    "user": "auth.User",
+    "err": "s.payments.Charge()",
+    "p": "s.products.Get()",
+    "lines": "append()",
+    "order": "s.orders.Create()"
+   }
+  },
+  "internal.service:Pricing.Line": {
+   "id": "internal.service:Pricing.Line",
+   "name": "Line",
+   "module": "internal.service",
+   "cls": "Pricing",
+   "file": "internal/service/pricing.go",
+   "line": 11,
+   "end_line": 13,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "p": "repos.Product",
+    "qty": "int"
+   }
+  },
+  "internal.service:validate": {
+   "id": "internal.service:validate",
+   "name": "validate",
+   "module": "internal.service",
+   "cls": null,
+   "file": "internal/service/pricing.go",
+   "line": 15,
+   "end_line": 25,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {}
+  },
+  "internal.service:total": {
+   "id": "internal.service:total",
+   "name": "total",
+   "module": "internal.service",
+   "cls": null,
+   "file": "internal/service/pricing.go",
+   "line": 27,
+   "end_line": 33,
+   "decorators": [],
+   "is_async": false,
+   "calls": [
+    {
+     "expr": "withTax",
+     "line": 32,
+     "order": 0,
+     "context": [],
+     "resolved": "internal.service:withTax",
+     "receiver": null,
+     "ext_kind": null
+    }
+   ],
+   "local_hints": {}
+  },
+  "internal.service:withTax": {
+   "id": "internal.service:withTax",
+   "name": "withTax",
+   "module": "internal.service",
+   "cls": null,
+   "file": "internal/service/pricing.go",
+   "line": 35,
+   "end_line": 37,
+   "decorators": [],
+   "is_async": false,
+   "calls": [],
+   "local_hints": {
+    "amount": "float64"
+   }
+  }
+ },
+ "entries": [
+  {
+   "id": "cmd.server:GET /healthz",
+   "kind": "route",
+   "label": "GET /healthz",
+   "score": 1.04
+  },
+  {
+   "id": "cmd.server:GET /orders/{id}",
+   "kind": "route",
+   "label": "GET /orders/{id}",
+   "score": 8.01
+  },
+  {
+   "id": "cmd.server:POST /orders",
+   "kind": "route",
+   "label": "POST /orders",
+   "score": 19.01
+  },
+  {
+   "id": "cmd.server:POST /orders/{id}/cancel",
+   "kind": "route",
+   "label": "POST /orders/{id}/cancel",
+   "score": 12.01
+  },
+  {
+   "id": "cmd.shopctl:migrate",
+   "kind": "cli",
+   "label": "cli migrate",
+   "score": 3.01
+  },
+  {
+   "id": "cmd.shopctl:restock",
+   "kind": "cli",
+   "label": "cli restock",
+   "score": 4.05
+  },
+  {
+   "id": "cmd.server:main",
+   "kind": "main",
+   "label": "main()",
+   "score": 6.05
+  },
+  {
+   "id": "cmd.shopctl:main",
+   "kind": "main",
+   "label": "main()",
+   "score": 0.04
+  }
+ ],
+ "stats": {
+  "root": "/Users/gerywibowo/Dev/vibesequence/examples/go_shop",
+  "files": 13,
+  "files_reparsed": 0,
+  "functions": 43,
+  "entries": 8,
+  "resolved_calls": 49,
+  "external_calls": 45,
+  "seconds": 0.009,
+  "import_roots": [],
+  "import_warning": "",
+  "version": "86621ea11a84",
+  "changed": false
+ }
+}

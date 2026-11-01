@@ -59,6 +59,9 @@ def main(argv=None):
     b.add_argument("path", nargs="?", default=".")
     b.add_argument("--out", default="vibesequence-out")
     b.add_argument("--no-cache", action="store_true")
+    b.add_argument("--source-url", default="",
+                   help="link sources to <url>/<file>#L<line> instead of an editor, for a hosted viewer "
+                        "(e.g. https://github.com/you/repo/blob/main)")
     b.add_argument("--hook", action="store_true",
                    help="print changed flows as Claude Code PostToolUse hook JSON (silent if nothing changed)")
 
@@ -104,7 +107,7 @@ def main(argv=None):
 
     if a.cmd == "build":
         old = builder.load(out) if a.hook and (out / "graph.json").exists() else None
-        graph = _build(Path(a.path), out, use_cache=not a.no_cache)
+        graph = _build(Path(a.path), out, use_cache=not a.no_cache, source_url=a.source_url)
         if a.hook:
             changes = _diff(old, graph) if old else ""
             if changes:
@@ -162,11 +165,11 @@ def main(argv=None):
         print(f"%% {count_messages(msg)} messages, level={a.level}, depth={a.depth}", file=sys.stderr)
 
 
-def _build(path: Path, out: Path, use_cache: bool = True, always_write: bool = True):
+def _build(path: Path, out: Path, use_cache: bool = True, always_write: bool = True, source_url: str = ""):
     graph = builder.build(path, out, use_cache=use_cache)
     # auto-rebuilds (show / serve polling) skip rewriting the viewer when no flow changed
     if always_write or graph.stats["changed"] or not (out / "index.html").exists():
-        html_render.write(graph, out / "index.html")
+        html_render.write(graph, out / "index.html", source_url)
         _write_flows_md(graph, out / "FLOWS.md")
     return graph
 
