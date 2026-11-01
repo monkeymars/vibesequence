@@ -4,7 +4,7 @@ name: Deploy landing page
 on:
   push:
     branches: ["main"]
-    paths: ["site/**", ".github/workflows/pages.yml"]
+    paths: ["site/**", "vibesequence/**", ".github/workflows/pages.yml"]   # demo/ is built from the code
   workflow_dispatch:
 
 permissions:
@@ -25,6 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      # live demo: the viewer for this repo, built from this commit, source links to GitHub
+      - run: |
+          pip install ".[ts,go]"
+          vibesequence build . --out site/demo --source-url "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
+          rm -f site/demo/cache.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

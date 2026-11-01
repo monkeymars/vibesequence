@@ -591,9 +591,10 @@ function badgeEl(b) { const s = document.createElement('span'); s.className = 'b
 // and is remembered. On file:// pages the link uses that editor's URL scheme; pages from `vibesequence serve`
 // ask the server to open the file via its CLI.
 const EDITOR = '__EDITOR__';                       // detected
+const SOURCE_URL = __SOURCE_URL__;                 // build --source-url: a hosted viewer links sources there, not to an editor
 const pickedEditor = () => EDITOR_NAME[prefs.editor] ? prefs.editor : undefined;   // ignore stale saved values
 const editorKey = () => pickedEditor() || EDITOR;  // picked, else detected
-const editorName = () => EDITOR_NAME[editorKey()] || 'your editor';
+const editorName = () => SOURCE_URL ? 'the repository' : EDITOR_NAME[editorKey()] || 'your editor';
 const EDITOR_NAME = { vscode: 'VS Code', cursor: 'Cursor', windsurf: 'Windsurf', antigravity: 'Antigravity', zed: 'Zed',
                       pycharm: 'PyCharm', idea: 'IntelliJ IDEA', system: 'your editor' };
 //  vscode://file<abs>:<line>:<col> is VS Code's handler; Cursor / Windsurf / Antigravity are VS Code forks with
@@ -604,6 +605,7 @@ const EDITOR_URL = { vscode: fileUrl('vscode'), cursor: fileUrl('cursor'), winds
                      antigravity: fileUrl('antigravity'), zed: (p, l) => `zed://file${encodeURI(p)}:${l}`,
                      pycharm: jetbrains('pycharm'), idea: jetbrains('idea') };
 function editorUrl(fn) {                           // absolute path = build root + relative file
+  if (SOURCE_URL) return `${SOURCE_URL}/${fn.file}#L${fn.line}`;
   let abs = (G.stats.root + '/' + fn.file).replace(/\\/g, '/');
   if (!abs.startsWith('/')) abs = '/' + abs;       // Windows: /C:/repo/app.py
   return (EDITOR_URL[editorKey()] || EDITOR_URL.vscode)(abs, fn.line);
@@ -1126,6 +1128,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if 
 async function openInEditor(e, fn, status) {
   if (!location.protocol.startsWith('http')) return;
   e.preventDefault();
+  if (SOURCE_URL) return void open(editorUrl(fn), '_blank', 'noopener');
   const href = editorUrl(fn);
   try {
     const r = await fetch('/__open', { method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -1138,6 +1141,7 @@ async function openInEditor(e, fn, status) {
 const srcStatus = msg => { $('srcStatus').textContent = msg; clearTimeout(srcStatus.t); srcStatus.t = setTimeout(() => $('srcStatus').textContent = '', 2500); };
 $('source').addEventListener('click', e => openInEditor(e, G.functions[state.path[state.path.length - 1]], srcStatus));
 { const pick = $('editorPick');                    // "Open in": Auto (detected) or a fixed editor, remembered
+  pick.hidden = !!SOURCE_URL;
   pick.add(new Option(`${EDITOR === 'system' ? 'OS default' : EDITOR_NAME[EDITOR] || 'Editor'} (auto)`, ''));
   for (const [key, name] of Object.entries(EDITOR_NAME)) pick.add(new Option(key === 'system' ? 'OS default app' : name, key));
   pick.value = pickedEditor() || '';
@@ -1221,7 +1225,7 @@ initMermaid();
   const fromHash = h && Object.keys(G.functions).find(k => k.replace(/[^A-Za-z0-9_.~-]/g, '_') === h);
   if (fromHash) state.path = [fromHash]; else if (G.entries.length) state.path = [G.entries[0].id];
   update();
-  if (location.protocol.startsWith('http')) {      // served: fetch the baseline, then follow the code
+  if (location.protocol.startsWith('http') && !SOURCE_URL) {   // served: fetch the baseline, then follow the code
     loadBase().then(update); poll(); setInterval(poll, 1500);
   }
 })();
