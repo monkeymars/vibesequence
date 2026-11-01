@@ -1,0 +1,21 @@
+# vibesequence
+
+> vibesequence is a free, open-source (MIT) command-line tool that turns a codebase into zoomable sequence diagrams: every HTTP route, CLI command and handler, drawn as who calls whom, in what order. It reads code statically (it never runs it) and is built for developers and their AI coding assistants.
+
+- Install: `pip install vibesequence` (Python 3.10+); add `[ts]` for TypeScript / JavaScript, `[go]` for Go.
+- Supported: Python (FastAPI, Flask, click, typer), TypeScript / JavaScript (Next.js, Express), Go (net/http, Gin, Echo, Chi, Fiber, Cobra).
+- Use: `vibesequence build .` writes `vibesequence-out/` (an interactive viewer, `FLOWS.md`, `graph.json`); `vibesequence serve` opens a live viewer that highlights what changed after each edit.
+- For AI assistants: `vibesequence show "POST /orders" --format text` returns one flow with `file:line`; `vibesequence callers <function>` returns who calls it and which flows are affected; `vibesequence install` adds instructions to `CLAUDE.md`.
+- Benchmark (Claude Code, 42 graded runs): 23% fewer input tokens on "what happens when…" questions, 53% fewer on impact questions; small edits cost 19% more.
+
+## Docs
+
+- [README](https://github.com/monkeymars/vibesequence/blob/main/README.md): install, commands, viewer shortcuts, roadmap
+- [How it works](https://github.com/monkeymars/vibesequence/blob/main/docs/how-it-works.md): entry-point detection, call resolution, limits
+- [Benchmark](https://github.com/monkeymars/vibesequence/blob/main/docs/benchmark/README.md): method and results
+
+## Links
+
+- [Live demo](https://monkeymars.github.io/vibesequence/demo/): the viewer for the vibesequence repo itself
+- [GitHub](https://github.com/monkeymars/vibesequence)
+- [PyPI](https://pypi.org/project/vibesequence/)

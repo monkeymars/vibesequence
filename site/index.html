@@ -9,6 +9,115 @@
 <meta property="og:description" content="Who calls whom, in what order. Zoom, play and diff the flows of your code. Python, TypeScript and Go.">
 <meta property="og:image" content="https://monkeymars.github.io/vibesequence/assets/live-diff-poster.jpg">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://monkeymars.github.io/vibesequence/">
+<meta property="og:site_name" content="vibesequence">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="The vibesequence viewer showing a sequence diagram with the steps an AI agent added highlighted in green">
+<meta name="twitter:title" content="vibesequence: living docs for you and your AI assistant">
+<meta name="twitter:description" content="Who calls whom, in what order. Zoom, play and diff the flows of your code. Python, TypeScript and Go.">
+<meta name="twitter:image" content="https://monkeymars.github.io/vibesequence/assets/live-diff-poster.jpg">
+<link rel="canonical" href="https://monkeymars.github.io/vibesequence/">
+<link rel="alternate" type="text/markdown" href="llms.txt" title="vibesequence for LLMs">
+<meta name="author" content="Gery Wibowo">
+<meta name="theme-color" content="#FCFCFA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://monkeymars.github.io/vibesequence/#app",
+   "name": "vibesequence",
+   "url": "https://monkeymars.github.io/vibesequence/",
+   "description": "Open-source CLI that turns a codebase into zoomable sequence diagrams of every route, command and handler, for developers and AI coding assistants.",
+   "applicationCategory": "DeveloperApplication",
+   "operatingSystem": "macOS, Linux, Windows (Python 3.10+)",
+   "softwareVersion": "0.2.1",
+   "license": "https://opensource.org/licenses/MIT",
+   "image": "https://monkeymars.github.io/vibesequence/assets/live-diff-poster.jpg",
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   },
+   "downloadUrl": "https://pypi.org/project/vibesequence/",
+   "sameAs": [
+    "https://github.com/monkeymars/vibesequence",
+    "https://pypi.org/project/vibesequence/"
+   ],
+   "author": {
+    "@type": "Person",
+    "name": "Gery Wibowo"
+   }
+  },
+  {
+   "@type": "SoftwareSourceCode",
+   "name": "vibesequence",
+   "codeRepository": "https://github.com/monkeymars/vibesequence",
+   "programmingLanguage": "Python",
+   "license": "https://opensource.org/licenses/MIT",
+   "targetProduct": {
+    "@id": "https://monkeymars.github.io/vibesequence/#app"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "What is vibesequence?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "vibesequence is a free, open-source command-line tool that turns a codebase into zoomable sequence diagrams. It finds every entry point (HTTP routes, CLI commands, handlers) and draws who calls whom, in what order, including if, loop and try blocks."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which languages and frameworks does it support?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Python (FastAPI, Flask, click, typer), TypeScript and JavaScript (Next.js app and pages routes, Express) and Go (net/http, Gin, Echo, Chi, Fiber, Cobra)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does it run my code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. vibesequence reads the source statically and never executes it, so it needs no running app, database or test data. Because it is static, it shows every possible path, both branches of every if."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How does it help AI coding assistants like Claude Code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It writes FLOWS.md, an index of every flow with file:line locations, and gives the assistant commands like show and callers that return one flow or the impact of a change in a single call. In a 42-run benchmark this cut input tokens by 23% on “what happens when…” questions and by 53% on impact questions."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How is it different from drawing sequence diagrams by hand or in Mermaid?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The diagrams are generated from the code itself, so they stay up to date after every change. Builds are incremental, and any diagram can be copied as Mermaid text."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is it free?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. vibesequence is MIT-licensed and installs with pip install vibesequence. Python projects need no extra dependencies; TypeScript and Go support are optional extras."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,6 +205,9 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: -.03em; margin: 0; }
        background: var(--press); font: 600 .74rem var(--mono); letter-spacing: .04em; color: var(--ink-2); text-transform: lowercase; }
 .note h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.08; font-weight: 800; margin-bottom: .8rem; }
 .note > p.sub { color: var(--ink-2); font-size: 1.08rem; max-width: 56ch; margin: 0 0 2rem; }
+.faq details { border-top: 1px solid var(--rule); padding: 1rem 0; } .faq details:last-child { border-bottom: 1px solid var(--rule); }
+.faq summary { cursor: pointer; font: 700 1.1rem var(--display); letter-spacing: -.02em; }
+.faq details p { color: var(--ink-2); max-width: 70ch; margin: .6rem 0 0; }
 .more { display: inline-block; margin-top: 1.6rem; font-weight: 600; text-underline-offset: 4px; }
 
 /* hero: no card, the opening of the diagram */
@@ -421,7 +533,7 @@ pre.code .c { color: var(--ink-3); }
     <span class="tag">note over you, ai agent</span>
     <h2>See what your AI changed</h2>
     <p class="sub">Keep the viewer open while the agent works. New steps turn green, removed ones are listed, and “Play changes” walks just those.</p>
-    <figure class="media"><video src="assets/live-diff.mp4" poster="assets/live-diff-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
+    <figure class="media"><video src="assets/live-diff.mp4" aria-label="An AI agent edits OrderService.place while the vibesequence viewer is open: the new step turns green and Play changes walks through it" poster="assets/live-diff-poster.jpg" muted loop playsinline preload="metadata"></video></figure>
   </section>
 
   <div class="gap">
@@ -459,6 +571,21 @@ pre.code .c { color: var(--ink-3); }
 vibesequence build .                 <span class="c"># parse the repo into vibesequence-out/</span>
 vibesequence serve                   <span class="c"># live viewer at http://127.0.0.1:8765</span>
 vibesequence install                 <span class="c"># teach Claude Code to use the flows</span></pre>
+  </section>
+
+  <div class="gap">
+    <div class="msg" data-from="0" data-to="1"><span class="arrow"></span><span class="label">questions?</span></div>
+  </div>
+
+  <section class="note faq" id="faq">
+    <span class="tag">note over you, vibesequence</span>
+    <h2>FAQ</h2>
+    <details><summary>What is vibesequence?</summary><p>vibesequence is a free, open-source command-line tool that turns a codebase into zoomable sequence diagrams. It finds every entry point (HTTP routes, CLI commands, handlers) and draws who calls whom, in what order, including if, loop and try blocks.</p></details>
+    <details><summary>Which languages and frameworks does it support?</summary><p>Python (FastAPI, Flask, click, typer), TypeScript and JavaScript (Next.js app and pages routes, Express) and Go (net/http, Gin, Echo, Chi, Fiber, Cobra).</p></details>
+    <details><summary>Does it run my code?</summary><p>No. vibesequence reads the source statically and never executes it, so it needs no running app, database or test data. Because it is static, it shows every possible path, both branches of every if.</p></details>
+    <details><summary>How does it help AI coding assistants like Claude Code?</summary><p>It writes FLOWS.md, an index of every flow with file:line locations, and gives the assistant commands like show and callers that return one flow or the impact of a change in a single call. In a 42-run benchmark this cut input tokens by 23% on “what happens when…” questions and by 53% on impact questions.</p></details>
+    <details><summary>How is it different from drawing sequence diagrams by hand or in Mermaid?</summary><p>The diagrams are generated from the code itself, so they stay up to date after every change. Builds are incremental, and any diagram can be copied as Mermaid text.</p></details>
+    <details><summary>Is it free?</summary><p>Yes. vibesequence is MIT-licensed and installs with pip install vibesequence. Python projects need no extra dependencies; TypeScript and Go support are optional extras.</p></details>
   </section>
 
   <div class="gap">
