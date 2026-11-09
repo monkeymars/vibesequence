@@ -121,6 +121,8 @@ Open for contributions! Pick a roadmap item, fix a bug, or improve the docs. Iss
   (see `extractors/base.py`). The resolver, viewer and CLI work without changes.
 - **Set up**: clone the repo and run `pip install -e ".[ts,go]"`.
 - **Run the tests** before opening a PR: `python tests/test_flow.py`
+- **Add tests**: a PR that adds or changes behavior must add or update a test in `tests/`. CI (pytest,
+  flake8, CodeQL, fuzzing) must pass before merge.
 - Not sure where to start? Open an issue and say what you want to build.
 
 ## Learn more
