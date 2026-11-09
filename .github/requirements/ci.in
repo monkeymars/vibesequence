@@ -1,0 +1,5 @@
+flake8
+pytest
+tree-sitter>=0.23
+tree-sitter-typescript>=0.23
+tree-sitter-go>=0.23
