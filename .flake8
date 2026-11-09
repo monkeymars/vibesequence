@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 127
+# examples/ are test fixtures: tests assert on their exact file:line positions, so they keep their style
+exclude = .git,__pycache__,build,dist,examples,vibesequence-out
+extend-ignore =
+    # cyclomatic complexity is a design metric, not a defect; C901 is opt-in and not enabled here
+    C901
+per-file-ignores =
+    # one-off dev scripts (benchmark, demo recorder), not shipped in the package
+    bench/*.py: E501,E702,E731,E741
+    demo/*.py: E501,E702

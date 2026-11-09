@@ -198,7 +198,7 @@ class Resolver:
         parts = expr.replace("()", "").split(".")
         cls = None
         if parts[0] == "self" and len(parts) == 2 and caller.cls:
-            cls, mod = caller.cls, caller.module
+            cls = caller.cls
         elif parts[0] == "self" and len(parts) == 3 and caller.cls:
             cls = self._attr_type(caller.cls, parts[1], caller.module)
         elif len(parts) == 2 and parts[0] in caller.local_hints:

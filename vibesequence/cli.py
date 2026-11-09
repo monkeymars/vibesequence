@@ -93,7 +93,8 @@ def main(argv=None):
     sv.add_argument("--out", default="vibesequence-out")
     sv.add_argument("--port", type=int, default=8765)
 
-    ins = sub.add_parser("install", help="add vibesequence instructions to CLAUDE.md / AGENTS.md so your assistant uses the flows")
+    ins = sub.add_parser("install",
+                         help="add vibesequence instructions to CLAUDE.md / AGENTS.md so your assistant uses the flows")
     ins.add_argument("--file", default="CLAUDE.md")
     ins.add_argument("--no-hook", action="store_true", help="only write the instructions, no Claude Code hook")
 
