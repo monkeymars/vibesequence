@@ -9,9 +9,6 @@
   <a href="https://github.com/monkeymars/vibesequence/blob/main/pyproject.toml"><img src="https://img.shields.io/badge/dependencies-0-3E8A5C" alt="Zero dependencies"/></a>
   <a href="https://github.com/monkeymars/vibesequence/blob/main/docs/how-it-works.md#the-ai-assistant-loop"><img src="https://img.shields.io/badge/works%20with-Claude%20Code-D97757" alt="Works with Claude Code"/></a>
   <a href="https://github.com/monkeymars/vibesequence/stargazers"><img src="https://img.shields.io/github/stars/monkeymars/vibesequence?style=flat" alt="GitHub stars"/></a>
-</p>
-
-<p align="center">
   <a href="https://securityscorecards.dev/viewer/?uri=github.com/monkeymars/vibesequence"><img src="https://api.securityscorecards.dev/projects/github.com/monkeymars/vibesequence/badge" alt="OpenSSF Scorecard"/></a>
   <a href="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"/></a>
   <a href="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml/badge.svg" alt="Dependency scan"/></a>
