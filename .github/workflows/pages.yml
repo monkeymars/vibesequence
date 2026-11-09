@@ -34,7 +34,7 @@ jobs:
           pip install --no-deps -e .
           vibesequence build . --out site/demo --source-url "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
           rm -f site/demo/cache.json
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site
       - id: deployment
