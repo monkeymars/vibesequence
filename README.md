@@ -12,6 +12,13 @@
 </p>
 
 <p align="center">
+  <a href="https://securityscorecards.dev/viewer/?uri=github.com/monkeymars/vibesequence"><img src="https://api.securityscorecards.dev/projects/github.com/monkeymars/vibesequence/badge" alt="OpenSSF Scorecard"/></a>
+  <a href="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"/></a>
+  <a href="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml/badge.svg" alt="Dependency scan"/></a>
+  <a href="https://github.com/monkeymars/vibesequence/actions/workflows/release-security.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/release-security.yml/badge.svg" alt="Release security"/></a>
+</p>
+
+<p align="center">
   <a href="https://monkeymars.github.io/vibesequence/"><b>Website</b></a> ·
   <a href="https://github.com/monkeymars/vibesequence/blob/main/docs/how-it-works.md"><b>How it works</b></a> ·
   <a href="https://github.com/monkeymars/vibesequence/blob/main/docs/benchmark/README.md"><b>Benchmark</b></a>
@@ -97,6 +104,17 @@ Try it on the bundled examples: clone this repo and run `vibesequence build exam
 - [ ] **Diff against a git ref**: review a PR as sequence changes, not line changes
 - [ ] **MCP server**: let the assistant call `list_flows` / `show_flow` instead of reading files
 - [ ] **Runtime traces** (optional): mark the paths that actually ran
+
+## Verify a release
+
+Every GitHub Release carries the built wheel and sdist with signed build provenance, a ClamAV scan
+and VirusTotal links in the release notes. Check a downloaded file came from this repo's CI:
+
+```bash
+gh attestation verify vibesequence-<version>-py3-none-any.whl --repo monkeymars/vibesequence
+```
+
+To report a vulnerability, see [SECURITY.md](SECURITY.md).
 
 ## Contributing
 

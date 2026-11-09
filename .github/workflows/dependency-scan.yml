@@ -1,0 +1,43 @@
+# GuardDog: scan every PyPI dependency declared in pyproject.toml (runtime + optional extras)
+# for signs of malicious packages. Fails on any finding.
+name: Dependency scan
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  guarddog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - run: pip install guarddog==3.2.0
+      - name: Scan dependencies
+        run: |
+          deps=$(python - <<'PY'
+          import re, tomllib
+          p = tomllib.load(open("pyproject.toml", "rb"))["project"]
+          reqs = p.get("dependencies", []) + sum(p.get("optional-dependencies", {}).values(), [])
+          print("\n".join(sorted({re.split(r"[<>=!~;\[ ]", r, maxsplit=1)[0] for r in reqs})))
+          PY
+          )
+          status=0
+          for d in $deps; do
+            echo "::group::$d"
+            guarddog pypi scan "$d" --exit-non-zero-on-finding || status=1
+            echo "::endgroup::"
+          done
+          exit $status
