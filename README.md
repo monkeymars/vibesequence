@@ -10,6 +10,7 @@
   <a href="https://github.com/monkeymars/vibesequence/blob/main/docs/how-it-works.md#the-ai-assistant-loop"><img src="https://img.shields.io/badge/works%20with-Claude%20Code-D97757" alt="Works with Claude Code"/></a>
   <a href="https://github.com/monkeymars/vibesequence/stargazers"><img src="https://img.shields.io/github/stars/monkeymars/vibesequence?style=flat" alt="GitHub stars"/></a>
   <a href="https://securityscorecards.dev/viewer/?uri=github.com/monkeymars/vibesequence"><img src="https://api.securityscorecards.dev/projects/github.com/monkeymars/vibesequence/badge" alt="OpenSSF Scorecard"/></a>
+  <a href="https://www.bestpractices.dev/projects/16498"><img src="https://www.bestpractices.dev/projects/16498/badge" alt="OpenSSF Best Practices"/></a>
   <a href="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"/></a>
   <a href="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/dependency-scan.yml/badge.svg" alt="Dependency scan"/></a>
   <a href="https://github.com/monkeymars/vibesequence/actions/workflows/release-security.yml"><img src="https://github.com/monkeymars/vibesequence/actions/workflows/release-security.yml/badge.svg" alt="Release security"/></a>
