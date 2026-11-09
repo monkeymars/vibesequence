@@ -164,7 +164,8 @@ def test_typescript_next_and_express():
     with tempfile.TemporaryDirectory() as d:
         graph = builder.build(example, Path(d))
         labels = {e.label for e in graph.entries if e.kind == "route"}
-        assert {"POST /api/orders", "GET /api/orders/[id]", "GET /api/me", "GET /orders/:id", "POST /orders/:id/cancel"} <= labels, labels
+        expected = {"POST /api/orders", "GET /api/orders/[id]", "GET /api/me", "GET /orders/:id", "POST /orders/:id/cancel"}
+        assert expected <= labels, labels
         text = _run("show", "POST /api/orders", "--out", d, "--format", "text", "--level", "function", "--depth", "6")
         for step in ("auth.requireUser", "OrderService.place", "BaseRepo.get", "for each in items",
                      "PricingEngine.priceLine", "OrderRepo.markFailed", "fetch", "pool.query", "orders/route.POST"):

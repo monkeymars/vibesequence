@@ -14,10 +14,10 @@ import ast
 import builtins
 from pathlib import Path
 
+from ..model import CallSite, FunctionDef, ModuleFacts
+
 # calls to these are noise in a sequence diagram (len, print, ValueError, ...)
 BUILTIN_NAMES = {n for n in dir(builtins) if not n.startswith("_")}
-
-from ..model import CallSite, FunctionDef, ModuleFacts
 
 CONTEXT_OF = {
     ast.If: "if",

@@ -388,14 +388,17 @@ class _Body:
         t, src = node.type, self.src
         if t == "if_statement":
             self.walk(node.child_by_field_name("condition"))
-            self._in(f"if:{_text(src, node.child_by_field_name('condition'), 42)[1:-1]}", node.child_by_field_name("consequence"))
+            cond = _text(src, node.child_by_field_name("condition"), 42)[1:-1]
+            self._in(f"if:{cond}", node.child_by_field_name("consequence"))
             alt = node.child_by_field_name("alternative")
             if alt is not None:
                 self._in("else", alt)
         elif t in ("for_in_statement", "for_statement"):
             if t == "for_in_statement":
                 self.walk(node.child_by_field_name("right"))
-                label = f"loop:for {_text(src, node.child_by_field_name('left'), 20)} of {_text(src, node.child_by_field_name('right'), 20)}"
+                left = _text(src, node.child_by_field_name("left"), 20)
+                right = _text(src, node.child_by_field_name("right"), 20)
+                label = f"loop:for {left} of {right}"
             else:
                 label = f"loop:for {_text(src, node.child_by_field_name('condition'), 38)}"
             self._in(label, node.child_by_field_name("body"))

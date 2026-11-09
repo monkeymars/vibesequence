@@ -150,7 +150,8 @@ def _apply_import_roots(modules: list[ModuleFacts]) -> tuple[list[str], str]:
         dot = prefix + "."
         renamed = {m.module: m.module[len(dot):] for m in modules if m.module.startswith(dot)}
         if set(renamed.values()) & (known - set(renamed)) or len(set(renamed.values())) < len(renamed):
-            warning = f"imports match {prefix.replace('.', '/')}/ but stripping it collides with other modules: build that folder"
+            warning = (f"imports match {prefix.replace('.', '/')}/ but stripping it collides with other modules: "
+                       "build that folder")
             continue
         cut = lambda s: s[len(dot):] if s.startswith(dot) else s   # noqa: E731
         for m in modules:

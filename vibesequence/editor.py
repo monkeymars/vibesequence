@@ -54,8 +54,8 @@ def detect(env: Mapping[str, str] = os.environ) -> tuple[str, str]:
     term = env.get("TERM_PROGRAM", "").lower()
     if env.get("ZED_TERM") or term == "zed":
         return "zed", "running in Zed's terminal"
-    host = " ".join(env.get(k, "") for k in ("__CFBundleIdentifier", "VSCODE_GIT_ASKPASS_NODE", "VSCODE_IPC_HOOK_CLI",
-                                              "GIT_ASKPASS", "TERMINAL_EMULATOR")).lower()
+    keys = ("__CFBundleIdentifier", "VSCODE_GIT_ASKPASS_NODE", "VSCODE_IPC_HOOK_CLI", "GIT_ASKPASS", "TERMINAL_EMULATOR")
+    host = " ".join(env.get(k, "") for k in keys).lower()
     if term == "vscode" or "jetbrains" in host or env.get("__CFBundleIdentifier"):
         for hint, key in _HOST_HINTS:
             if hint in host:
